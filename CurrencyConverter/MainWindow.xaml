@@ -3,30 +3,109 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 		xmlns:local="clr-namespace:CurrencyConverter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="50"/>
-		</Grid.RowDefinitions>
-		<lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Left" Margin="30,50,30,30" Grid.RowSpan="2">
-			<lvc:CartesianChart.AxisX>
-				<lvc:Axis LabelFormatter="{Binding Formatter}"
-                  MinValue="{Binding InitialDateTime.Ticks}">
-				</lvc:Axis>
-			</lvc:CartesianChart.AxisX>
-		</lvc:CartesianChart>
-		<Label
-			Content="PrivatBank monthly exchange rate" 
-			HorizontalAlignment="Left" 
-			VerticalAlignment="Top"
-			Margin="251,20,0,0" 
-			Width="380" 
-			FontFamily="Berlin Sans FB" 
-			FontSize="18"
-			/>
-	</Grid>
+        ResizeMode="NoResize"
+        Title="CurrencyConverter" Height="448" Width="899">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="0,0,0,-26">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Border 
+                BorderBrush="Gray" 
+                BorderThickness="1"
+                CornerRadius="8"
+                Grid.Row="0" 
+                Margin="10,67,372,26" 
+                Grid.RowSpan="2"
+                >
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    Margin="9,-1" 
+                    >
+                    <ComboBox 
+                        HorizontalAlignment="Right"  
+                        VerticalAlignment="Top"
+                        Margin="10,40,0,0" 
+                        Name="ExchangeFrom"
+                        Height="25" 
+                        Width="180"  
+                        >
+                        <TextBlock Text="USD (Долар США)" />
+                        <TextBlock Text="EUR (Євро)" />
+                        <TextBlock Text="UAH (Гривня)"/>
+                    </ComboBox>
+                    <TextBox
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        VerticalAlignment="Top"
+                        AcceptsReturn="True"
+                        TextWrapping="Wrap"
+                        MaxWidth="400"
+                        Width="170"
+                        Height="55"
+                        Name="Amount_Entered"
+                        Margin="-280,80,-100,0"
+                        Text="{Binding Path=ConvertValue}"
+                        />
+                    <materialDesign:PackIcon 
+                        Margin="45,90,45,0"
+                        Kind="ArrowRight" 
+                        />
+                    <ComboBox 
+                        HorizontalAlignment="Right"
+                        Name="ExchangeTo"
+                        VerticalAlignment="Top"   
+                        Margin="0,40,0,0"   
+                        Height="25" 
+                        Width="180"   
+                        >
+                        <TextBlock Text="USD (Долар США)" />
+                        <TextBlock Text="EUR (Євро)" />
+                        <TextBlock Text="UAH (Гривня)"/>
+                    </ComboBox>
+                    <TextBox
+                        Style="{StaticResource MaterialDesignFilledTextBox}"
+                        VerticalAlignment="Top"
+                        AcceptsReturn="True"
+                        TextWrapping="Wrap"
+                        MaxWidth="400"
+                        Width="170"
+                        Height="55"
+                        IsReadOnly="True"
+                        Margin="-280,80,-100,0"
+                        Name="Amount_Show"
+                        Text="{Binding Path=ConvertedValue}"
+                        />
+                </StackPanel>
+            </Border>
+            <Border 
+                BorderBrush="Blue" 
+                BorderThickness="1"
+                CornerRadius="8"
+                Grid.Row="0" 
+                Margin="535,67,10,26"
+                Grid.RowSpan="2"
+             >
+                <StackPanel Margin="9,-1,9,0">
+                    <Label Content="Курси валют" Margin="0,20,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" RenderTransformOrigin="0.509,1.486" FontFamily="Verdana" FontSize="20"/>
+                    <Label x:Name="Info1" Content="1 USD = 29.43 UAH" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="114,100,0,0"/>
+                    <Label Content="NBU" Margin="0,-35,219,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"/>
+                    <Label x:Name="Info2" Content="1 USD = 28.3 UAH" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="109,0,0,0"/>
+                    <Label Content="PrivatBank" Margin="0,-35,219,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"/>
+                </StackPanel>
+            </Border>
+            <StackPanel x:Name="stackPanel" Margin="21,224,381,0">
+                <RadioButton x:Name="checkBox1" IsThreeState="True" IsChecked="True" Height="20" Content="NBU" Margin="197,0,194,0" />
+                <RadioButton x:Name="checkBox2" IsThreeState="True" IsChecked="False" Height="20" Content="PrivatBank" Margin="197,0,194,0" />
+                <Button Content="Convert" Margin="165,23,165,76" Height="Auto"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
 </Window>
