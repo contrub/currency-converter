@@ -3,7 +3,7 @@ using System.Net;
 
 namespace CurrencyConverter
 {
-    class APIRequest
+    class ApiController
     {
         private static string NBURequestToCurrentDay = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
         private static string PrivatRequestToDate = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";

@@ -7,7 +7,7 @@ using CurrencyConverter.Model;
 
 namespace CurrencyConverter
 {
-    public class Parser
+    public class ParserController
     {
         private string jsonResponse;
         private List<NBURate> currencyRatesNBU;
@@ -15,7 +15,7 @@ namespace CurrencyConverter
 
         public void FillListFromJSONToCurrentDayNBU()
         {
-            APIRequest API = new APIRequest();
+            ApiController API = new ApiController();
 
             API.MakeRequestToCurrentDay();
 
@@ -31,7 +31,7 @@ namespace CurrencyConverter
         }
         public void FillCurrencyRateToCurrentDayPrivat()
         {
-            APIRequest API = new APIRequest();
+            ApiController API = new ApiController();
 
             API.MakeRequestToCurrentDatePrivat();
 
