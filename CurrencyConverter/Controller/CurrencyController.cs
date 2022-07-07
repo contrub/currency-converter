@@ -26,8 +26,7 @@ namespace CurrencyConverter.Controller
         }
         public void ResetValues()
         {
-            amountEntered = 0;
-            window.AmountShow.Text = "0";
+            window.AmountShow.Text = "";
             window.NBURateInfo.Content = "";
             window.PrivatRateInfo.Content = "";
         }
