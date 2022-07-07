@@ -87,11 +87,11 @@ namespace CurrencyConverter.Controller
         }
         public bool IsNbuChosen()
         {
-            return (bool)window.checkBox1.IsChecked;
+            return (bool)window.NBUCB.IsChecked;
         }
         public bool IsPrivatBankChosen()
         {
-            return (bool)window.checkBox2.IsChecked;
+            return (bool)window.PrivatCB.IsChecked;
         }
 
         public void MakeConvert()

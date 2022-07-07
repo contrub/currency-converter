@@ -100,8 +100,8 @@
                 </StackPanel>
             </Border>
             <StackPanel x:Name="stackPanel" Margin="21,244,381,0">
-                <RadioButton x:Name="checkBox1" IsThreeState="True" IsChecked="True" Height="20" Content="НБУ" Margin="197,0,194,0" />
-                <RadioButton x:Name="checkBox2" IsThreeState="True" IsChecked="False" Height="20" Content="ПриватБанк" Margin="197,0,194,0" />
+                <RadioButton x:Name="NBUCB" IsThreeState="True" IsChecked="True" Height="20" Content="НБУ" Margin="197,0,194,0" />
+                <RadioButton x:Name="PrivatCB" IsThreeState="True" IsChecked="False" Height="20" Content="ПриватБанк" Margin="197,0,194,0" />
                 <Button Content="Конвертувати" Margin="165,23,165,76" Height="Auto" Click="Button_Click"/>
             </StackPanel>
         </Grid>
