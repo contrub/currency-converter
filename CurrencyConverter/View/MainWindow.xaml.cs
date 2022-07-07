@@ -14,8 +14,12 @@ namespace CurrencyConverter
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {            
-            if (!currencyController.CheckCurrencies()) return;
+        {
+            if (!currencyController.CheckCurrencies())
+            {
+                currencyController.ResetValues();
+                return;
+            };
 
             currencyController.UpdateValues();
 
