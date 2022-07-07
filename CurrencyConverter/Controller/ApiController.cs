@@ -5,19 +5,26 @@ namespace CurrencyConverter
 {
     class ApiController
     {
-        private static string NBURequestToCurrentDay = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
-        private static string PrivatRequestToDate = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
+        private static string NBURequestUrl = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json";
+        private static string PrivatRequestUrl = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
 
         private WebRequest request;
         private WebResponse response;
-
-        public void MakeRequestToCurrentDay()
+        public static string GetNBUUrl()
         {
-            request = WebRequest.Create(NBURequestToCurrentDay);
+            return NBURequestUrl;
         }
-        public void MakeRequestToCurrentDatePrivat()
+        public static string GetPrivatUrl()
         {
-            request = WebRequest.Create(PrivatRequestToDate);
+            return PrivatRequestUrl;
+        }
+        public void MakeNBURequest()
+        {
+            request = WebRequest.Create(NBURequestUrl);
+        }
+        public void MakePrivatRequest()
+        {
+            request = WebRequest.Create(PrivatRequestUrl);
         }
         public WebResponse GetResponse()
         {

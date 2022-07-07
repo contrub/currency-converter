@@ -78,12 +78,12 @@ namespace CurrencyConverter.Controller
 
         public void SetResult(double amount)
         {
-            window.AmountShow.Text = Math.Round(amount, 3).ToString();
+            window.AmountShow.Text = amount.ToString();
         }
         public void SetCourse(double NBUCourse, double PrivatCourse)
         {
-            window.NBURateInfo.Content = $"1 {baseCurrency} = {Math.Round(NBUCourse, 3)} {convertedCurrency}";
-            window.PrivatRateInfo.Content = $"1 {baseCurrency} = {Math.Round(PrivatCourse, 3)} {convertedCurrency}";
+            window.NBURateInfo.Content = $"1 {baseCurrency} = {NBUCourse} {convertedCurrency}";
+            window.PrivatRateInfo.Content = $"1 {baseCurrency} = {PrivatCourse} {convertedCurrency}";
         }
         public bool IsNbuChosen()
         {
@@ -99,8 +99,8 @@ namespace CurrencyConverter.Controller
             ConverterController converter = new ConverterController();
             ParserController parser = new ParserController();
 
-            parser.FillCurrencyRateNbu();
-            parser.FillCurrencyRatePrivat();
+            parser.FillCurrencyRatesNbu();
+            parser.FillCurrencyRatesPrivat();
 
             double convertResult = 0;
 

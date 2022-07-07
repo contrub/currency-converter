@@ -2,8 +2,8 @@
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
-
 using CurrencyConverter.Model;
+using System;
 
 namespace CurrencyConverter
 {
@@ -12,13 +12,13 @@ namespace CurrencyConverter
         private List<NBURate> currencyRateNbu;
         private List<PrivatBankRate> currencyRatePrivat;
 
-        public void FillCurrencyRateNbu()
+        public void FillCurrencyRatesNbu()
         {
             ApiController API = new ApiController();
             string jsonResponse;
 
-            API.MakeRequestToCurrentDay();
-
+            API.MakeNBURequest();
+            
             using (WebResponse webResponse = API.GetResponse())
             {
                 using (Stream dataStream = webResponse.GetResponseStream())
@@ -31,12 +31,12 @@ namespace CurrencyConverter
             currencyRateNbu = JsonConvert.DeserializeObject<List<NBURate>>(jsonResponse);
         }
 
-        public void FillCurrencyRatePrivat()
+        public void FillCurrencyRatesPrivat()
         {
             ApiController API = new ApiController();
             string jsonResponse;
 
-            API.MakeRequestToCurrentDatePrivat();
+            API.MakePrivatRequest();
 
             using (WebResponse webResponse = API.GetResponse())
             {
@@ -88,18 +88,18 @@ namespace CurrencyConverter
                 }
             }
 
-            return curerncyRate;
+            return Math.Round(curerncyRate, 3);
         }
 
         public double GetCurrencyCrossRateNBU(string baseCurrency, string currency_to)
         {
-            double result = 1;
+            double curerncyRate = 1;
             double c1 = 1;
             double c2 = 1;
 
             if (baseCurrency.Equals(currency_to))
             {
-                return result;
+                return curerncyRate;
             }
 
             foreach (NBURate rate in currencyRateNbu)
@@ -113,18 +113,18 @@ namespace CurrencyConverter
                 }
             }
 
-            result = c1 / c2;
+            curerncyRate = c1 / c2;
 
-            return result;
+            return Math.Round(curerncyRate, 3);
         }
 
         public double GetCurrencyRatePrivat(string baseCurrency, string convertedCurrency)
         {
-            double result = 1;
+            double curerncyRate = 1;
 
             if (baseCurrency.Equals(convertedCurrency))
             {
-                return result;
+                return curerncyRate;
             }
 
             if (!baseCurrency.Equals("UAH") && !convertedCurrency.Equals("UAH"))
@@ -136,27 +136,27 @@ namespace CurrencyConverter
             {
                 if (rate.ccy == baseCurrency)
                 {
-                    result = rate.buy;
+                    curerncyRate = rate.buy;
                     break;
                 } else if (rate.ccy == convertedCurrency)
                 {
-                    result = 1 / rate.sale;
+                    curerncyRate = 1 / rate.sale;
                     break;
                 }
             }
 
-            return result;
+            return Math.Round(curerncyRate, 3);
         }
 
         public double GetCurrencyCrossRatePrivat(string baseCurrency, string convertedCurrency)
         {
-            double result = 1; 
+            double curerncyRate = 1; 
             double c1 = 1;
             double c2 = 1;
 
             if (baseCurrency.Equals(convertedCurrency))
             {
-                return result;
+                return curerncyRate;
             }
 
             foreach (PrivatBankRate rate in currencyRatePrivat)
@@ -171,9 +171,9 @@ namespace CurrencyConverter
                 }
             }
 
-            result = c1 / c2;
+            curerncyRate = c1 / c2;
 
-            return result;
+            return Math.Round(curerncyRate, 3);
         }
     }
 }

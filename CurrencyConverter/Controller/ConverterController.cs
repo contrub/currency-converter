@@ -13,20 +13,13 @@ namespace CurrencyConverter.Controller
         public double NBUConvert(string baseCurrency, string convertedCurrency, double amount)
         {
             ParserController parser = new ParserController();
-            LogController logger = new LogController();
-            DateTime dateTime = DateTime.Now;
             double currencyRate;
 
-            parser.FillCurrencyRateNbu();
+            parser.FillCurrencyRatesNbu();
 
             currencyRate = parser.GetCurrencyRateNBU(baseCurrency, convertedCurrency);
 
-            string value = string.Format("{0} - {1} - {2} - {3} - {4} - {5}",
-                    dateTime.ToShortDateString(), dateTime.TimeOfDay,
-                    baseCurrency, convertedCurrency,
-                    "NBU", currencyRate
-                    );
-            logger.Write(value);
+            Logger.Write(baseCurrency, convertedCurrency, currencyRate, "NBU", ApiController.GetNBUUrl());
 
             return currencyRate * amount;
         }
@@ -34,20 +27,13 @@ namespace CurrencyConverter.Controller
         public double PrivatBankConvert(string baseCurrency, string convertedCurrency, double amount)
         {
             ParserController parser = new ParserController();
-            LogController logger = new LogController();
-            DateTime dateTime = DateTime.Now;
             double currencyRate;
 
-            parser.FillCurrencyRatePrivat();
+            parser.FillCurrencyRatesPrivat();
 
             currencyRate = parser.GetCurrencyRatePrivat(baseCurrency, convertedCurrency);
 
-            string value = string.Format("{0} - {1} - {2} - {3} - {4} - {5}",
-                    dateTime.ToShortDateString(), dateTime.TimeOfDay,
-                    baseCurrency, convertedCurrency,
-                    "PrivatBank", currencyRate
-                    );
-            logger.Write(value);
+            Logger.Write(baseCurrency, convertedCurrency, currencyRate, "PrivatBank", ApiController.GetPrivatUrl());
 
             return currencyRate * amount;
         }
