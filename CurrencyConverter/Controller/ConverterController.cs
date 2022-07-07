@@ -23,7 +23,7 @@ namespace CurrencyConverter.Controller
             return parser.GetCurrencyCrossRateNBU(baseCurrency, convertedCurrency) * amount;
         }
 
-        public double PrivatBankConvert(string baseCurrency, string convertedCurrency, double inp)
+        public double PrivatBankConvert(string baseCurrency, string convertedCurrency, double amount)
         {
             ParserController parser = new ParserController();
 
@@ -31,10 +31,10 @@ namespace CurrencyConverter.Controller
 
             if (baseCurrency.Equals("UAH") || convertedCurrency.Equals("UAH"))
             {
-                return parser.GetCurrencyRatePrivat(baseCurrency, convertedCurrency) * inp;
+                return parser.GetCurrencyRatePrivat(baseCurrency, convertedCurrency) * amount;
             }
             
-            return parser.GetCurrencyCrossRatePrivat(baseCurrency, convertedCurrency) * inp;
+            return parser.GetCurrencyCrossRatePrivat(baseCurrency, convertedCurrency) * amount;
         }
     }
 }
