@@ -98,6 +98,10 @@ namespace CurrencyConverter.Controller
         public void MakeConvert()
         {
             ConverterController converter = new ConverterController();
+            ParserController parser = new ParserController();
+
+            parser.FillCurrencyRateNbu();
+            parser.FillCurrencyRatePrivat();
 
             double convertResult = 0;
 
@@ -112,7 +116,7 @@ namespace CurrencyConverter.Controller
 
             SetResult(convertResult);
 
-            SetCourse(converter.NBUConvert(baseCurrency, convertedCurrency, 1), converter.PrivatBankConvert(baseCurrency, convertedCurrency, 1));
+            SetCourse(parser.GetCurrencyRateNBU(baseCurrency, convertedCurrency), parser.GetCurrencyRatePrivat(baseCurrency, convertedCurrency));
         }
     }
 }
