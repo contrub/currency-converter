@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,29 +13,55 @@ namespace CurrencyConverter.Controller
         public double NBUConvert(string baseCurrency, string convertedCurrency, double amount)
         {
             ParserController parser = new ParserController();
+            LogController logger = new LogController();
+            DateTime dateTime = DateTime.Now;
+            double currencyRate;
 
             parser.FillCurrencyRateNbu();
 
             if (baseCurrency.Equals("UAH") || convertedCurrency.Equals("UAH"))
             {
-                return parser.GetCurrencyRateNBU(baseCurrency, convertedCurrency) * amount;
+                currencyRate = parser.GetCurrencyRateNBU(baseCurrency, convertedCurrency);
+            } else
+            {
+                currencyRate = parser.GetCurrencyCrossRateNBU(baseCurrency, convertedCurrency);
             }
-            
-            return parser.GetCurrencyCrossRateNBU(baseCurrency, convertedCurrency) * amount;
+
+            string value = string.Format("{0} - {1} - {2} - {3} - {4} - {5}",
+                    dateTime.ToShortDateString(), dateTime.TimeOfDay,
+                    baseCurrency, convertedCurrency,
+                    "NBU", currencyRate
+                    );
+            logger.Write(value);
+
+            return currencyRate * amount;
         }
 
         public double PrivatBankConvert(string baseCurrency, string convertedCurrency, double amount)
         {
             ParserController parser = new ParserController();
+            LogController logger = new LogController();
+            DateTime dateTime = DateTime.Now;
+            double currencyRate;
 
             parser.FillCurrencyRatePrivat();
 
             if (baseCurrency.Equals("UAH") || convertedCurrency.Equals("UAH"))
             {
-                return parser.GetCurrencyRatePrivat(baseCurrency, convertedCurrency) * amount;
+                currencyRate = parser.GetCurrencyRatePrivat(baseCurrency, convertedCurrency);
+            } else
+            {
+                currencyRate = parser.GetCurrencyCrossRatePrivat(baseCurrency, convertedCurrency);
             }
             
-            return parser.GetCurrencyCrossRatePrivat(baseCurrency, convertedCurrency) * amount;
+            string value = string.Format("{0} - {1} - {2} - {3} - {4} - {5}",
+                    dateTime.ToShortDateString(), dateTime.TimeOfDay,
+                    baseCurrency, convertedCurrency,
+                    "PrivatBank", currencyRate
+                    );
+            logger.Write(value);
+
+            return currencyRate * amount;
         }
     }
 }
