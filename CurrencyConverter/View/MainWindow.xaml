@@ -93,16 +93,16 @@
              >
                 <StackPanel Margin="9,-1,9,0">
                     <Label Content="Курси валют" Margin="0,20,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" RenderTransformOrigin="0.509,1.486" FontFamily="Verdana" FontSize="20"/>
-                    <Label x:Name="NBURateInfo" Content="" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="114,100,0,0"/>
-                    <Label Content="NBU" Margin="0,-35,219,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"/>
-                    <Label x:Name="PrivatRateInfo" Content="" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="114,0,0,0"/>
-                    <Label Content="PrivatBank" Margin="0,-35,219,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"/>
+                    <Label x:Name="NBURateInfo" Content="" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="133,100,10,0"/>
+                    <Label Content="НБУ" Margin="0,-35,200,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="18"/>
+                    <Label x:Name="PrivatRateInfo" Content="" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="133,0,10,0"/>
+                    <Label Content="ПриватБанк" Margin="0,-35,200,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="18"/>
                 </StackPanel>
             </Border>
             <StackPanel x:Name="stackPanel" Margin="21,244,381,0">
-                <RadioButton x:Name="checkBox1" IsThreeState="True" IsChecked="True" Height="20" Content="NBU" Margin="197,0,194,0" />
-                <RadioButton x:Name="checkBox2" IsThreeState="True" IsChecked="False" Height="20" Content="PrivatBank" Margin="197,0,194,0" />
-                <Button Content="Convert" Margin="165,23,165,76" Height="Auto" Click="Button_Click"/>
+                <RadioButton x:Name="checkBox1" IsThreeState="True" IsChecked="True" Height="20" Content="НБУ" Margin="197,0,194,0" />
+                <RadioButton x:Name="checkBox2" IsThreeState="True" IsChecked="False" Height="20" Content="ПриватБанк" Margin="197,0,194,0" />
+                <Button Content="Конвертувати" Margin="165,23,165,76" Height="Auto" Click="Button_Click"/>
             </StackPanel>
         </Grid>
     </Grid>
