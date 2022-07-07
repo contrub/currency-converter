@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace CurrencyConverter.Controller
 {
@@ -13,14 +14,14 @@ namespace CurrencyConverter.Controller
         private string baseCurrency;
         private string convertedCurrency;
         private double amountEntered = 0;
-        public CurrencyController(MainWindow window_e)
+        public CurrencyController(MainWindow newWindow)
         {
-            window = window_e;
+            window = newWindow;
         }
         public void UpdateValues()
         {
-            baseCurrency = window.ExchangeFrom.Text;
-            convertedCurrency = window.ExchangeTo.Text;
+            baseCurrency = window.ExchangeFrom.Text.Substring(0, 3);
+            convertedCurrency = window.ExchangeTo.Text.Substring(0, 3);
             amountEntered = double.Parse(window.AmountEntered.Text);
         }
         public void ResetValues()
@@ -76,14 +77,14 @@ namespace CurrencyConverter.Controller
             return amountEntered;
         }
 
-        public void SetResult(double r)
+        public void SetResult(double amount)
         {
-            window.AmountShow.Text = Math.Round(r, 3).ToString();
+            window.AmountShow.Text = Math.Round(amount, 3).ToString();
         }
-        public void SetCourse(double amount1, double amount2)
+        public void SetCourse(double NBUCourse, double PrivatCourse)
         {
-            window.NBURateInfo.Content = $"1 {baseCurrency.Substring(0, 3)} = {Math.Round(amount1, 3)} {convertedCurrency.Substring(0, 3)}";
-            window.PrivatRateInfo.Content = $"1 {baseCurrency.Substring(0, 3)} = {Math.Round(amount2, 3)} {convertedCurrency.Substring(0, 3)}";
+            window.NBURateInfo.Content = $"1 {baseCurrency} = {Math.Round(NBUCourse, 3)} {convertedCurrency}";
+            window.PrivatRateInfo.Content = $"1 {baseCurrency} = {Math.Round(PrivatCourse, 3)} {convertedCurrency}";
         }
         public bool IsNbuChosen()
         {
@@ -96,27 +97,22 @@ namespace CurrencyConverter.Controller
 
         public void MakeConvert()
         {
-            ConverterController convertCont = new ConverterController();
+            ConverterController converter = new ConverterController();
 
-            double result = convertCont.NBUConvert(
-                    baseCurrency.Substring(0, 3), convertedCurrency.Substring(0, 3),
-                    amountEntered
-                    );
-            double alt = convertCont.PrivatBankConvert(
-                baseCurrency.Substring(0, 3), convertedCurrency.Substring(0, 3),
-                amountEntered
-                );
+            double convertResult = 0;
 
             if (IsNbuChosen())
             {
-                SetResult(result);
+                convertResult = converter.NBUConvert(baseCurrency, convertedCurrency, amountEntered);
             }
             else if (IsPrivatBankChosen())
             {
-                SetResult(alt);
+                convertResult = converter.PrivatBankConvert(baseCurrency, convertedCurrency, amountEntered);
             }
 
-            SetCourse(result / amountEntered, alt / amountEntered);
+            SetResult(convertResult);
+
+            SetCourse(converter.NBUConvert(baseCurrency, convertedCurrency, 1), converter.PrivatBankConvert(baseCurrency, convertedCurrency, 1));
         }
     }
 }
