@@ -12,47 +12,51 @@ namespace CurrencyConverter.Controller
         private MainWindow window;
         private string baseCurrency;
         private string convertedCurrency;
-        private double amountEntered;
-        
-        public CurrencyController(MainWindow newWindow)
+        private double amountEntered = 0;
+        public CurrencyController(MainWindow window_e)
         {
-            window = newWindow;
+            window = window_e;
         }
-
         public void UpdateValues()
         {
             baseCurrency = window.ExchangeFrom.Text;
             convertedCurrency = window.ExchangeTo.Text;
-            amountEntered = double.Parse(window.Amount_Entered.Text);
+            amountEntered = double.Parse(window.AmountEntered.Text);
         }
-
+        public void ResetValues()
+        {
+            amountEntered = 0;
+            window.AmountShow.Text = "0";
+            window.NBURateInfo.Content = "";
+            window.PrivatRateInfo.Content = "";
+        }
         public bool CheckCurrencies()
         {
             if (string.IsNullOrEmpty(window.ExchangeFrom.Text))
             {
-                MessageBox.Show("You have not selected a currency to convert from");
+                MessageBox.Show("Ви не обрали базову валюту для конвертації");
                 return false;
             }
 
             if (string.IsNullOrEmpty(window.ExchangeTo.Text))
             {
-                MessageBox.Show("You have not selected a currency to convert to");
+                MessageBox.Show("Ви не обрали конвертовану валюту для конвертації");
                 return false;
             }
 
             try
             {
-                double.Parse(window.Amount_Entered.Text);
+                double.Parse(window.AmountEntered.Text);
             }
             catch (FormatException)
             {
-                MessageBox.Show("Error Input !");
+                MessageBox.Show("Помилка парсингу введеної суми");
                 return false;
             }
 
-            if (double.Parse(window.Amount_Entered.Text) < 0)
+            if (double.Parse(window.AmountEntered.Text) < 0)
             {
-                MessageBox.Show("Cannot be negative number !");
+                MessageBox.Show("Конвертована сума не може бути від'ємною");
                 return false;
             }
 
@@ -72,9 +76,14 @@ namespace CurrencyConverter.Controller
             return amountEntered;
         }
 
-        public void SetAmountResult(double amount)
+        public void SetResult(double r)
         {
-            window.Amount_Show.Text = Math.Round(amount, 3).ToString();
+            window.AmountShow.Text = Math.Round(r, 3).ToString();
+        }
+        public void SetCourse(double amount1, double amount2)
+        {
+            window.NBURateInfo.Content = $"1 {baseCurrency.Substring(0, 3)} = {Math.Round(amount1, 3)} {convertedCurrency.Substring(0, 3)}";
+            window.PrivatRateInfo.Content = $"1 {baseCurrency.Substring(0, 3)} = {Math.Round(amount2, 3)} {convertedCurrency.Substring(0, 3)}";
         }
         public bool IsNbuChosen()
         {
@@ -87,25 +96,27 @@ namespace CurrencyConverter.Controller
 
         public void MakeConvert()
         {
-            double convertedAmount = 1;
-
             ConverterController convertCont = new ConverterController();
 
-            if (IsNbuChosen())
-            {
-                convertedAmount = convertCont.NBUConvert(
-                    baseCurrency.Substring(0, 3), convertedCurrency.Substring(0, 3), 
-                    amountEntered
-                    );
-            } else if (IsPrivatBankChosen())
-            {
-                convertedAmount = convertCont.PrivatBankConvert(
+            double result = convertCont.NBUConvert(
                     baseCurrency.Substring(0, 3), convertedCurrency.Substring(0, 3),
                     amountEntered
                     );
+            double alt = convertCont.PrivatBankConvert(
+                baseCurrency.Substring(0, 3), convertedCurrency.Substring(0, 3),
+                amountEntered
+                );
+
+            if (IsNbuChosen())
+            {
+                SetResult(result);
+            }
+            else if (IsPrivatBankChosen())
+            {
+                SetResult(alt);
             }
 
-            SetAmountResult(convertedAmount);
+            SetCourse(result / amountEntered, alt / amountEntered);
         }
     }
 }
