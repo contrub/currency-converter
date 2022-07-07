@@ -19,13 +19,7 @@ namespace CurrencyConverter.Controller
 
             parser.FillCurrencyRateNbu();
 
-            if (baseCurrency.Equals("UAH") || convertedCurrency.Equals("UAH"))
-            {
-                currencyRate = parser.GetCurrencyRateNBU(baseCurrency, convertedCurrency);
-            } else
-            {
-                currencyRate = parser.GetCurrencyCrossRateNBU(baseCurrency, convertedCurrency);
-            }
+            currencyRate = parser.GetCurrencyRateNBU(baseCurrency, convertedCurrency);
 
             string value = string.Format("{0} - {1} - {2} - {3} - {4} - {5}",
                     dateTime.ToShortDateString(), dateTime.TimeOfDay,
@@ -46,14 +40,8 @@ namespace CurrencyConverter.Controller
 
             parser.FillCurrencyRatePrivat();
 
-            if (baseCurrency.Equals("UAH") || convertedCurrency.Equals("UAH"))
-            {
-                currencyRate = parser.GetCurrencyRatePrivat(baseCurrency, convertedCurrency);
-            } else
-            {
-                currencyRate = parser.GetCurrencyCrossRatePrivat(baseCurrency, convertedCurrency);
-            }
-            
+            currencyRate = parser.GetCurrencyRatePrivat(baseCurrency, convertedCurrency);
+
             string value = string.Format("{0} - {1} - {2} - {3} - {4} - {5}",
                     dateTime.ToShortDateString(), dateTime.TimeOfDay,
                     baseCurrency, convertedCurrency,

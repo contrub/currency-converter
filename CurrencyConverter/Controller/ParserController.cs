@@ -69,6 +69,11 @@ namespace CurrencyConverter
                 return curerncyRate;
             }
 
+            if (!baseCurrency.Equals("UAH") && !convertedCurrency.Equals("UAH"))
+            {
+                return GetCurrencyCrossRateNBU(baseCurrency, convertedCurrency);
+            }
+
             foreach (NBURate rate in currencyRateNbu)
             {
                 if (rate.cc == baseCurrency)
@@ -120,6 +125,11 @@ namespace CurrencyConverter
             if (baseCurrency.Equals(convertedCurrency))
             {
                 return result;
+            }
+
+            if (!baseCurrency.Equals("UAH") && !convertedCurrency.Equals("UAH"))
+            {
+                return GetCurrencyCrossRatePrivat(baseCurrency, convertedCurrency);
             }
 
             foreach (PrivatBankRate rate in currencyRatePrivat)
