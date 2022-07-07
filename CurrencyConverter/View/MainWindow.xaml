@@ -92,7 +92,7 @@
                 Grid.RowSpan="2"
              >
                 <StackPanel Margin="9,-1,9,0">
-                    <Label Content="Курси валют" Margin="0,20,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" RenderTransformOrigin="0.509,1.486" FontFamily="Verdana" FontSize="20"/>
+                    <Label Content="Курс валюти" Margin="0,20,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" RenderTransformOrigin="0.509,1.486" FontFamily="Verdana" FontSize="20"/>
                     <Label x:Name="NBURateInfo" Content="" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="133,100,10,0"/>
                     <Label Content="НБУ" Margin="0,-35,200,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="18"/>
                     <Label x:Name="PrivatRateInfo" Content="" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="133,0,10,0"/>
