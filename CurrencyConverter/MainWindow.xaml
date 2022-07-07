@@ -81,6 +81,9 @@
                         Margin="-280,80,-100,0"
                         Name="AmountShow"
                         />
+                    <RadioButton x:Name="NBUCB" IsThreeState="True" IsChecked="True" Height="20" Content="НБУ" Margin="-270,50,194,0" />
+                    <RadioButton x:Name="PrivatCB" IsThreeState="True" IsChecked="False" Height="20" Content="ПриватБанк" Margin="-270,100,194,0" />
+                    <Button Content="Конвертувати" Margin="-325,226,165,36" Height="Auto" Click="Button_Click" Width="126"/>
                 </StackPanel>
             </Border>
             <Border 
@@ -99,11 +102,6 @@
                     <Label Content="ПриватБанк" Margin="0,-35,200,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="18"/>
                 </StackPanel>
             </Border>
-            <StackPanel x:Name="stackPanel" Margin="21,244,381,0">
-                <RadioButton x:Name="NBUCB" IsThreeState="True" IsChecked="True" Height="20" Content="НБУ" Margin="197,0,194,0" />
-                <RadioButton x:Name="PrivatCB" IsThreeState="True" IsChecked="False" Height="20" Content="ПриватБанк" Margin="197,0,194,0" />
-                <Button Content="Конвертувати" Margin="165,23,165,76" Height="Auto" Click="Button_Click"/>
-            </StackPanel>
         </Grid>
     </Grid>
 </Window>
