@@ -13,6 +13,17 @@ This project is developed as part of the academic practice. The project represen
 - Logging of all API requests (date, time, source, URL, response)
 - Intuitive graphical user interface
 
+## Project Demo
+
+<details>
+<summary><b>Click to expand</b></summary>
+
+![Converter Testing](images/converter_testing.png)
+
+Converter testing demo
+
+</details>
+
 ## Technologies Used
 
 - C#
